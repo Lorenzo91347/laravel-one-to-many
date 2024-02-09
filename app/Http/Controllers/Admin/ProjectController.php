@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Support\Str;
 
 class ProjectController extends Controller
 {
@@ -36,11 +37,13 @@ class ProjectController extends Controller
         $data = $request->validated();
 
         $newProject = new Project();
+        
 
         $newProject -> fill($data);
+        $newProject->slug = Str::of($data['title'])->slug('-');
        
         $newProject->save();
-        return redirect()->route('show',$newProject -> id);
+        return redirect()->route('show');
     }
 
     /**
@@ -48,7 +51,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        return view('show',$project->id);
+        return view('show',$project->id,compact('project'));
     }
 
     /**
@@ -62,11 +65,13 @@ class ProjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
         
-        $data = $request->all();
+        $data = $request->validated();
         $project ->update($data);
+        $project->slug = Str::of($data['title'])->slug('-');
+        return redirect()->route('index');
     }
 
     /**

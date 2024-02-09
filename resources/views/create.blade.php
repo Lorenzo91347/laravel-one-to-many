@@ -3,6 +3,7 @@
 @section('content')
 <form>
     <h1>New Comic</h1>
+    @csrf
     <form action="{{ route('admin.projects.store') }}" method="POST">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label text-warning">Project Name</label>
