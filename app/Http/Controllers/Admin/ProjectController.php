@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ProjectController extends Controller
@@ -33,6 +34,7 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+        dd($request);
         
         $data = $request->validated();
 
@@ -41,7 +43,7 @@ class ProjectController extends Controller
 
         $newProject -> fill($data);
         $newProject->slug = Str::of($data['title'])->slug('-');
-       
+        $img_path = Storage::put('uploads',$data['image']);
         $newProject->save();
         return redirect()->route('show');
     }
