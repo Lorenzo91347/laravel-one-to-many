@@ -34,17 +34,19 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
-        dd($request);
         
         $data = $request->validated();
 
         $newProject = new Project();
         
-
         $newProject -> fill($data);
+
         $newProject->slug = Str::of($data['title'])->slug('-');
-        $img_path = Storage::put('uploads',$data['image']);
+
+        $img_path = Storage::disk('public')->put('uploads',$data['image']);
+
         $newProject->save();
+
         return redirect()->route('show');
     }
 

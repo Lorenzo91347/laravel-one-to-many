@@ -16,6 +16,16 @@
       <textarea class="form-control " name="description" id="description" cols="30" rows="10">{{old('description')}}</textarea>
     </div>
     <div class="mb-3">
+    <label for="type" class="form-label text-warning">Language Type</label>
+      <select class="form-select" aria-label="Default select example">
+        <option selected>Please choose the language used:</option>
+        <option value="Html">Html</option>
+        <option value="Js">Js</option>
+        <option value="Css">Css</option>
+        <option value="Php">Php</option>
+      </select>
+    </div>
+    <div class="mb-3">
       <label for="post_image" class="form-label text-warning">Add an Image to your Project</label>
       <input class="form-control" type="file" id="post_image" name="post_image">
   </div>
