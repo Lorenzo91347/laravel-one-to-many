@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProjectRequest;
 use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -26,7 +27,8 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('create');
+        $types =Type::all();
+        return view('create',compact('types'));
     }
 
     /**
@@ -37,15 +39,17 @@ class ProjectController extends Controller
         
         $data = $request->validated();
 
-        $newProject = new Project();
+        $project = new Project();
         
-        $newProject -> fill($data);
+        $project -> fill($data);
 
-        $newProject->slug = Str::of($data['title'])->slug('-');
+        $project->slug = Str::of($data['title'])->slug('-');
 
-        $img_path = Storage::disk('public')->put('uploads',$data['image']);
+        if (isset($data['post_image'])){
+        $project->post_image = Storage::put('uploads',$data('post_image'));
+        }
 
-        $newProject->save();
+        $project->save();
 
         return redirect()->route('show');
     }
@@ -75,7 +79,7 @@ class ProjectController extends Controller
         $data = $request->validated();
         $project ->update($data);
         $project->slug = Str::of($data['title'])->slug('-');
-        return redirect()->route('index');
+        return redirect()->route('show');
     }
 
     /**
@@ -85,6 +89,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect()->route('projects');
+        return redirect()->route('welcome');
     }
 }

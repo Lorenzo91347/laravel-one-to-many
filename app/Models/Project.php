@@ -9,5 +9,10 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $guarded =[];
+    protected $guarded =['slug','post_image'];
+
+    public function type(){
+
+        return $this->belongsTo(Type::class);
+    }
 }

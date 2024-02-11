@@ -3,7 +3,7 @@
 @section('content')
 @include('partials.errors')
 <form>
-    <h1>New Comic</h1>
+    <h1 class="text-warning">New Project</h1>
     @csrf
     
     <form action="{{ route('admin.projects.store') }}" method="POST" enctype="multipart/form-data">
@@ -17,12 +17,12 @@
     </div>
     <div class="mb-3">
     <label for="type" class="form-label text-warning">Language Type</label>
-      <select class="form-select" aria-label="Default select example">
+      <select class="form-select" aria-label="Default select example" name="type_id">
         <option selected>Please choose the language used:</option>
-        <option value="Html">Html</option>
-        <option value="Js">Js</option>
-        <option value="Css">Css</option>
-        <option value="Php">Php</option>
+       
+        @foreach ($types as $type)
+            <option value="{{$type->id}}">{{$type->title}}</option>
+        @endforeach
       </select>
     </div>
     <div class="mb-3">
