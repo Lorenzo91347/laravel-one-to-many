@@ -29,7 +29,7 @@
       <label for="post_image" class="form-label text-warning">Add an Image to your Project</label>
       <input class="form-control" type="file" id="post_image" name="post_image">
   </div>
-    <button type="submit" class="btn btn-warning">Submit</button>
+    <button type="submit" class="btn btn-warning">Submit the entry</button>
   </form>
 
 @endsection
