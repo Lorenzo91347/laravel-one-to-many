@@ -13,7 +13,7 @@
     </div>
     <div class="mb-3">
       <label for="exampleInputPassword1" class="form-label text-warning">Description</label>
-      <textarea class="form-control " name="description" id="" cols="30" rows="10">{{$project->description}}</textarea>
+      <textarea class="form-control " name="content" id="" cols="30" rows="10">{{$project->content}}</textarea>
     </div>
     <div class="mb-3">
       <label for="type" class="form-label text-warning">Language Type</label>

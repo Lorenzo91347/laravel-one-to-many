@@ -8,7 +8,6 @@
        <li class="list-group-item-dark"> {{ $project->slug }}</li>
        <li> <a rel="stylesheet" href="{{ route('admin.projects.edit', $project) }}" role="button"
         class="btn btn-primary btn-warning">edit</a></li>
-<li> 
        <li>
         <form action="{{ route('admin.projects.destroy', $project) }}" method="POST">
             @csrf
